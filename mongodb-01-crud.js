@@ -146,4 +146,24 @@ testInsertManyDocs(
 // 함수 내보내기: 다른 모듈에서 사용할 수 있게  
 exports.testInsertOneDoc = testInsertOneDoc;
 exports.testInsertManyDocs = testInsertManyDocs;
-exports.testDeleteAll = testDeleteAll;   
+exports.testDeleteAll = testDeleteAll;
+
+function testUpdateByJob(name, job) {
+    //  name이 일치하는 문서, job 필드를 업데이트
+    client.connect()
+    .then(client => {
+        const db = client.db("mydb");
+        db.collection("friends").updateMany(
+            { name: name}, /* 조건 객체 */
+            {
+                $set: { job: job }  //  $set 연산자 필수
+            }
+        ).then(result => {
+            console.log(result.modifiedCount, "개 업데이트,",
+                        result.upsertedCount, "개 업서트");
+        }).then(() => {
+            client.close();
+        })
+    })
+}
+testUpdateByJob("고길동", "직장인");
