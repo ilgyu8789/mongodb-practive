@@ -86,50 +86,50 @@ title: "Fourth Post:, by: "hong", likes: 10
 INSERT 연습
 */
 
-// INSERT연습
+
 db.posts.insert({
     title: "First Post",
     by: "bit",
-    likes: 30
- })
- 
- db.posts.insert({
+    likes: 10
+})
+
+db.posts.insert({
     title: "Second Post",
-    by: "park",
+    by: "hong",
     likes: 50
- })
- 
- db.posts.insert({
+})
+
+db.posts.insert({
     title: "Third Post",
     by: "bit",
     likes: 30
- })
- 
- db.post.insert({
-    title: "Fourth Post",
-    by: "park",
-    likes: 10
- })
- 
- // 여러 문서를 insert - insertMany
- db.posts.insertMany([
-      { title: "Fifth Post",
-           by: "bit",
-           likes: 50 },
-      { title: "SIxth Post",
-           by: "park",
-           likes: 50 }   
- ])
- 
- // 문서의 검색
- //   findOne: 조건을 만족하는 문서 중 한개를 반환
- //   find(): 조건을 만족하는 문서의 커서를 반환
- 
- db.posts.findOne()
- db.posts.find()
- //    .pretty() 메서드: BSON을 보기 좋게 출력
+})
 
- // 검색 조건 연산자
+db.posts.insert({
+    title: "Fourth Post",
+    by: "hong",
+    likes: 10
+})
+
+// 여러 문서를 insert - insertMany
+db.posts.insertMany([
+    { title: "Fifth Post",
+	    by: "bit",
+	    likes: 50 },
+    { title: "Sixth Post",
+	    by: "hong",
+	    likes: 50 }
+])
+
+// 문서의 검색
+//  findOne: 조건을 만족하는 문서 중 한개를 반환
+//  find(): 조건을 만족하는 문서의 커서를 반환
+
+db.posts.findOne()
+db.posts.find()
+//  .pretty() 메서드: BSON을 보기 좋게 출력
+
+// 검색 조건 연산자
 // 같다: { key: value }
 db.posts.find({ "by": "bit" })	// by = bit
 
@@ -196,3 +196,4 @@ db.posts.find().limit(2).skip(2)
 
 // likes의 역순으로 정렬
 db.posts.find().sort({likes: -1})
+db.posts.find().sort({likes: -1, title: 1}) // 정렬 기준 여러 개
